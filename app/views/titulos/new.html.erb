@@ -1,0 +1,19 @@
+<h1>Nueva Titulo</h1>
+<% form_for(@titulo) do |f| %>
+  <%= f.error_messages %>
+  <table  frame = "box", width = "500">
+    <tr>
+      <td>
+        <%= image_submit_tag "OK.gif", :id => "BotonOK1" %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), autor_path(session[:id]) %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table>  
+    <tr> <td width=150, align=left>Nombre </td> <td><%= f.text_area :nombre, :cols =>20, :rows =>1  %></td> 
+	     <td><%= f.hidden_field :autor_id %></td></tr>
+<!--    <tr> <td>Nombre Accion</td> <td><%= f.text_field :nombre,:size => 50 %></td> </tr>  -->
+    <tr> <td>Fecha Publicacion</td> <td><%= f.calendar_date_select :fecha, :popup => "force" %></td> </tr>
+  </table>
+<% end %>

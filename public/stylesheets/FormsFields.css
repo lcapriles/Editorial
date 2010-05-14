@@ -1,0 +1,130 @@
+body
+   {
+    border: 3px ridge #e1ff2a;
+    background-color: Gainsboro;
+   }
+table.tope
+   {
+    border-width: 0px;
+    border-spacing: 0px;
+    border-style: none;
+    border-color: gray;
+   }
+table.tope th
+   {
+    border-width: 1px;
+    padding: 1px;
+	text-align: left;
+    border-style: none;
+    border-color: "transparent";
+    -moz-border-radius: 0px 0px 0px 0px;
+   }   
+table.lista
+   {
+    border-width: 0px;
+    border-spacing: 0px;
+    border-style: none;
+    border-color: gray;
+   }
+table.lista th
+   {
+    border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: black;
+    -moz-border-radius: 0px 0px 0px 0px;
+   }
+table.lista td
+   {
+	border-width: 1px;
+	padding: 5px 0px 2px 0px;
+	border-style: solid;
+	border-color: gray;
+	vertical-align: middle;
+	white-space: nowrap;
+	-moz-border-radius: 0px 0px 0px 0px;
+   }
+table.lista tr
+   {
+	border-width: 10px;
+	padding: 5px 0px 2px 0px;
+	border-style: solid;
+	border-color: gray;
+	background-color: #FF0000;
+	vertical-align: middle;
+	-moz-border-radius: 0px 0px 0px 0px;
+   }
+tr.Impar 
+   {
+    background: gray;
+   }
+tr.Par 
+   {
+    background: Gainsboro;
+   }
+	
+tr.Impar:hover, #Impar.hover{
+	background: blue;
+	cursor: pointer; /* hand-shaped cursor */
+    cursor: hand; /* for IE 5.x */
+}
+tr.Par:hover, 	#Par.hover{
+	background: red;
+	cursor: pointer; /* hand-shaped cursor */
+    cursor: hand; /* for IE 5.x */
+}
+
+#BotonAccionLista
+   {
+	border-width: 0px;
+	padding: 0px;
+	border-style: none;
+	border-color: gray;
+	background-color: #ffcc66;
+	-moz-border-radius: 0px 0px 0px 0px;
+   }
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   12px;
+  line-height: 10px;
+}
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+

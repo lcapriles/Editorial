@@ -1,0 +1,20 @@
+<h1>Nueva Autor</h1>
+<% form_for(@autor) do |f| %>
+
+  <%= f.error_messages %>
+  <table  frame = "box", width = "500">
+    <tr>
+      <td>
+        <%= image_submit_tag "OK.gif", :id => "BotonOK1" %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), autors_path %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table> 
+    <tr> <td>Nombre</td> <td><%= text_field_with_auto_complete :autor, :nombre, { :size => 30 }, 
+                                                               { :method => "get" } %></td></tr>   
+<!--    <tr> <td>Nombre Accion</td> <td><%= f.text_field :nombre,:size => 50 %></td> </tr>  -->
+    <tr> <td>Fecha Ingreso</td> <td><%= f.calendar_date_select :fecha, :popup => "force" %></td> </tr>  
+  </table>
+<% end %>

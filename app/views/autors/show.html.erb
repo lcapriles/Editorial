@@ -1,0 +1,49 @@
+<h1>Verificar Autor</h1>
+<% form_for(@autor) do |f| %>
+  <%= f.error_messages %>
+  <table  frame = "box", width = "500">
+    <tr>
+      <td>
+      	<%= link_to image_tag("Add.gif", :mouseover => "Addmo.gif", :border => 0 ), new_titulo_path %>
+        <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0 ), edit_autor_path(@autor) %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), autors_path %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table> 
+    <tr> <td width=150, align=left>ID </td> <td><%= @autor.id %></td> </tr>
+    <tr> <td width=150, align=left>Nombre </td> <td><%= @autor.nombre %></td> </tr>
+    <tr> <td width=150, align=left>Fecha </td> <td><%= @autor.fecha %></td> </tr>
+  </table>
+  <table>
+    <tr>
+      <th>ID</th>
+	  <th>Autor ID</th>
+      <th>Nombre</th>
+      <th>Fecha</th>
+     </tr>
+  </table>
+  <div id="titulos">
+    <br>
+  	<%= render :partial => "titulos", :object => @titulos %>
+	<br>
+  </div>
+  <%= will_paginate @titulos %>
+<% end %>
+
+<h1>Nuevo Titulo</h1>
+<% form_for :titulo, @titulo, :url => "/titulos/create" do |f| %>
+  <%= f.error_messages %>
+  <br /> 
+  <table>  
+    <tr> 
+	  <td align=right>Nombre </td> <td><%= f.text_area :nombre, :cols =>20, :rows =>1 %></td> 
+	  <td><%= f.hidden_field :autor_id %></td>
+<!--      <td>Nombre Accion</td> <td><%= f.text_field :nombre,:size => 50 %></td> </tr>  -->
+      <td width=120, align=right>Fecha Ingreso</td> <td><%= f.calendar_date_select :fecha, :popup => "force" %></td> 
+      <td width=30>          </td>
+      <td> <%= image_submit_tag "OK.gif", :id => "BotonOK1" %>  </td>
+	</tr> 
+  </table>
+<% end %>

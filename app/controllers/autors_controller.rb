@@ -1,5 +1,5 @@
 class AutorsController < ApplicationController
-  
+
   before_filter :localize_date, :only => [:update, :create ]
   def localize_date
     params[:autor][:fecha].gsub!(/[.\/]/,'-')

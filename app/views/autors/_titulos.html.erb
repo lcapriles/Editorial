@@ -1,0 +1,22 @@
+<table>
+  <% for titulo in @titulos do %>
+  <tr class="<%= cycle("Impar","Par") %>">
+    <td><%= titulo.id %></td>
+    <td><%= titulo.autor_id %></td>
+    <td><%= titulo.nombre %></td>
+    <td><%= titulo.fecha %></td>	  
+   	<td width=30>          </td>
+    <td><%= link_to image_tag("modetail.gif", :mouseover => "modetailmo.gif", :border => 0), titulo %></td>
+    <td><%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0), edit_titulo_path(titulo) %></td>
+    <td><%= link_to image_tag("Delete.gif", :mouseover => "Deletemo.gif", :border => 0), titulo, 
+                                            :confirm => 'Confirma la operacion?', :method => :delete %></td>
+  </tr>
+  <% end %>
+</table>
+
+
+
+
+
+
+

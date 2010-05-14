@@ -1,0 +1,17 @@
+<h1>Verificar Titulo</h1>
+<% form_for(@titulo) do |f| %>
+  <%= f.error_messages %>
+  <table  frame = "box", width = "500">
+    <tr>
+      <td>
+        <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0 ), edit_titulo_path(@titulo) %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), autor_path(session[:id]) %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table> 
+    <tr> <td width=150, align=left>Nombre </td> <td><%= @titulo.nombre %></td> </tr>
+    <tr> <td width=150, align=left>Fecha </td> <td><%= @titulo.fecha %></td> </tr>
+  </table>
+<% end %>

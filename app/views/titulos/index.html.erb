@@ -1,0 +1,45 @@
+<h1>Tabla Titulo</h1>
+<table  frame = "box", width = "500">
+  <tr>
+	<td>
+	<%= link_to image_tag("Add.gif", :mouseover => "Addmo.gif", :border => 0 ), new_titulo_path %>
+	<%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), new_titulo_path %>
+	</td>
+  </tr> 
+</table>
+<br />
+<% form_tag(titulos_path, :method => "get") do %>
+  <table>
+	<tr>
+		  <td align=left><%= text_field_tag :nombre, @qbe_index[:nombre], options={ :size=> 10 } %></td>
+    	  <td align=left><%= text_field_tag :fecha, @qbe_index[:fecha], options={ :size=> 10 } %></td>
+    <!--      <td align=left><%= text_field_tag :NombreCampo1, @qbe_index[:Campo1], options={ :size=> 10 } %></td> -->
+    <!--      <td align=left><%= text_field_tag :NombreCampo2, @qbe_index[:Campo2], options={ :size=> 30 } %></td> -->
+	  <td><%= image_submit_tag "Find.gif", :id => "BotonFind1" %></td>
+	</tr>
+  </table>
+<% end %>
+<table>
+  <tr>
+      <th>ID</th>
+	  <th>Autor ID</th>
+	  <th>Nombre</th>
+      <th>Fecha</th>
+    </tr>
+  <% for titulo in @titulos -%>
+     <tr class="<%= cycle("Impar","Par") %>">  
+	  <td><%= titulo.id %></td>
+	  <td><%= titulo.autor_id %></td>
+      <td><%= titulo.nombre %></td>
+      <td><%= titulo.fecha %></td>
+  	<td width=30>          </td>
+    <td><%= link_to image_tag("modetail.gif", :mouseover => "modetailmo.gif", :border => 0), titulo %></td>
+    <td><%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0), edit_titulo_path(titulo) %></td>
+    <td><%= link_to image_tag("Delete.gif", :mouseover => "Deletemo.gif", :border => 0), titulo, :confirm => 'Confirma la operacion?', :method => :delete %></td>
+  </tr>
+  <% end -%>
+</table>
+
+<br />
+<p>Mas Registros...</p>
+<%= will_paginate @titulos %>
