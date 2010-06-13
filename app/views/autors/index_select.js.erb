@@ -1,0 +1,16 @@
+<h1>Select P2 Autor</h1>
+
+
+  <% for autor in @autors -%>
+  <tr class="<%= cycle("Impar","Par") %>">
+    <td align=left><%= radio_button("autor", "id", :id) %></td>
+    <td><%= autor.id %></td>
+    <td><%= autor.nombre %></td>
+    <td><%= autor.fecha %></td>
+  </tr>	
+  <% end -%>
+
+
+<br />
+<p>Mas Registros...</p>
+<%= will_paginate @autors %>

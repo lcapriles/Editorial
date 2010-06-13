@@ -1,0 +1,10 @@
+<table>
+  <%- for autor in @autors -%>
+  <tr class="<%= cycle("Impar","Par") %>">
+    <td><%= radio_button_tag "autor_id", autor.id, false, :onclick => "$('campo1').value = this.value" %></td>
+    <td><%= autor.id %></td>
+    <td><%= autor.nombre %></td>
+    <td><%= autor.fecha %></td>
+  </tr>	
+  <% end -%>
+</table>

@@ -1,0 +1,57 @@
+<h1>Select Autor</h1>
+<table  frame = "box", width = "500">
+  <tr><td>
+  	<%= image_tag "Select.gif", :mouseover => "Selectmo.gif", :border => 0,
+        :onclick => "$('autor_nombre').value = $('autor_nombre_selected').value; RedBox.close();" %>
+    <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), new_autor_path %>
+	</td></tr> 
+</table>
+
+<br />
+
+<% form_tag("/autors/index_select.html", :method => "get") do %>
+  <table>	
+    <tr>
+		  <td align=left><%= text_field_tag :nombre, @qbe_key[:nombre], options={ :size=> 10 } %></td>
+    	<td align=left><%= text_field_tag :fecha, @qbe_key[:fecha], options={ :size=> 10 } %></td>
+<!--      <td align=left><%= text_field_tag :NombreCampo1, @qbe_key[:Campo1], options={ :size=> 10 } %></td> -->
+<!--      <td align=left><%= text_field_tag :NombreCampo2, @qbe_key[:Campo2], options={ :size=> 30 } %></td> -->
+	    <td><%= link_to_remote image_tag("Find.gif", :mouseover => "Findmo.gif", :border => 0), 
+              :method => 'get', :url => {:action => "index_select1"},
+              :with => "'nombre=' + $('nombre').value + '&fecha=' + $('fecha').value", 
+              :update => "div_index_select1" %></td>
+	  </tr>
+  </table>
+<% end %>
+
+<table>
+  <tr>
+    <th>ID</th>  	
+    <th>Nombre</th>
+    <th>Fecha</th>
+  </tr>
+</table>
+<input type="hidden", id="autor_id_selected", name="autor_id_selected">
+<input type="hidden", id="autor_nombre_selected", name="autor_nombre_selected">
+<div id="div_index_select1">
+<table>
+  <% for autor in @autors -%>
+  <tr class="<%= cycle("Impar","Par") %>">            
+    <td><%= radio_button_tag "autor_id", autor.id, false, 
+              :onclick => "$('autor_id_selected').value = this.value;$('autor_nombre_selected').value ='" + autor.nombre + "';"  %></td>
+    <td><%= autor.id %></td>
+    <td><%= autor.nombre %></td>
+    <td><%= autor.fecha %></td>
+  </tr>	
+  <% end -%>
+</table>
+</div>
+<br />
+<p>Mas Registros...</p>
+<%= link_to_remote "<< Anterior..", 
+              :method => 'get', :url => {:action => "index_select1"}, :with => "'page=' + '-1' ", 
+              :update => "div_index_select1" %>
+<%= link_to_remote "..Proximo >>", 
+              :method => 'get', :url => {:action => "index_select1"}, :with => "'page=' + '+1' ", 
+              :update => "div_index_select1" %>
+						
