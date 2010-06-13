@@ -1,7 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.connect 'auto_complete_for_autor_nombre.js', :controller => 'autors',
-                                               :action => 'auto_complete_for_autor_nombre'
+                                                   :action => 'auto_complete_for_autor_nombre'
+  map.connect 'autors/index_select', :controller => 'autors',:action => 'index_select'    
+  map.connect 'autors/index_select1', :controller => 'autors',:action => 'index_select1'  
    
   map.resources :autors, :has_many => :titulos
   map.resources :titulos 

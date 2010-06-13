@@ -9,7 +9,7 @@ class TitulosController < ApplicationController
   # GET /titulos.xml
   def index
 
-    @qbe_index = Titulo.new(params[:titulo]) 
+    @qbe_index = Titulo.new(params[:titulo]) #TODO: sustituir por subrutina....
     
     params.each do |key, value|
       if @qbe_index.attribute_names().include?(key)
@@ -73,7 +73,7 @@ class TitulosController < ApplicationController
     respond_to do |format|
       if @titulo.save
         flash[:notice] = ''
-        format.html { redirect_to(autor_path(session[:id])) }
+        format.html { redirect_to(autor_path(@titulo[:autor_id])) }
         format.xml  { head :ok }
       else
         format.html { render :action => "new" }
@@ -90,7 +90,7 @@ class TitulosController < ApplicationController
     respond_to do |format|
       if @titulo.update_attributes(params[:titulo])
         flash[:notice] = ''
-        format.html { redirect_to(autor_path(session[:id])) }
+        format.html { redirect_to(autor_path(@titulo[:autor_id])) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

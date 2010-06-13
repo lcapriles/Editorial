@@ -2,23 +2,24 @@
 <table  frame = "box", width = "500">
   <tr>
 	<td>
-	<%= link_to image_tag("Add.gif", :mouseover => "Addmo.gif", :border => 0 ), new_autor_path %>
-	<%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), new_autor_path %>
+	 <%= link_to image_tag("Add.gif", :mouseover => "Addmo.gif", :border => 0 ), new_autor_path %>
+	 <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), new_autor_path %>
 	</td>
   </tr> 
 </table>
 <br />
 <% form_tag(autors_path, :method => "get") do %>
-  <table>
-	<tr>
-		  <td align=left><%= text_field_tag :nombre, @qbe_index[:nombre], options={ :size=> 10 } %></td>
-    	  <td align=left><%= text_field_tag :fecha, @qbe_index[:fecha], options={ :size=> 10 } %></td>
-<!--          <td align=left><%= text_field_tag :NombreCampo1, @qbe_index[:Campo1], options={ :size=> 10 } %></td> -->
-<!--          <td align=left><%= text_field_tag :NombreCampo2, @qbe_index[:Campo2], options={ :size=> 30 } %></td> -->
-	  <td><%= image_submit_tag "Find.gif", :id => "BotonFind1" %></td>
-	</tr>
+  <table>	
+    <tr>
+		  <td align=left><%= text_field_tag :nombre, @qbe_key[:nombre], options={ :size=> 10 } %></td>
+    	<td align=left><%= text_field_tag :fecha, @qbe_key[:fecha], options={ :size=> 10 } %></td>
+<!--         <td align=left><%= text_field_tag :NombreCampo1, @qbe_key[:Campo1], options={ :size=> 10 } %></td> TODO:@qbe_key en scaffold vista -->
+<!--         <td align=left><%= text_field_tag :NombreCampo2, @qbe_key[:Campo2], options={ :size=> 30 } %></td> -->
+	    <td><%= image_submit_tag "Find.gif", :id => "BotonFind1" %></td>
+	  </tr>
   </table>
 <% end %>
+
 <table>
   <tr>
     <th>ID</th>  	
@@ -27,15 +28,19 @@
   </tr>
   <% for autor in @autors -%>
   <tr class="<%= cycle("Impar","Par") %>">
-   <td><%= autor.id %></td>
-   <td><%= autor.nombre %></td>
-   <td><%= autor.fecha %></td>
-   <td width=30>          </td>
-   <td><%= link_to image_tag("modetail.gif", :mouseover => "modetailmo.gif", :border => 0), autor %></td>
-   <td><%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0), edit_autor_path(autor) %></td>
-   <td><%= link_to image_tag("Delete.gif", :mouseover => "Deletemo.gif", :border => 0), autor, 
+    <td><%= autor.id %></td>
+    <td><%= autor.nombre %></td>
+    <td><%= autor.fecha %></td>
+    <td width=30>          </td>
+    <td><%= link_to image_tag("modetail.gif", :mouseover => "modetailmo.gif", :border => 0), autor %></td>
+    <td><%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0), edit_autor_path(autor) %></td>
+    <td><%= link_to image_tag("Delete.gif", :mouseover => "Deletemo.gif", :border => 0), autor, 
                                            :confirm => 'Confirma la operacion?', :method => :delete %></td>
-  </tr>
+    <td><%= link_to_remote_redbox image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0), 
+              :method => 'get', :url => edit_autor_path(autor) %></td>	
+		<td><%= link_to_remote_redbox image_tag("Add.gif", :mouseover => "Addmo.gif", :border => 0), 
+              :method => 'post', :url => new_titulo_path + "/" + autor.id.to_s %></td>
+  </tr>	
   <% end -%>
 </table>
 

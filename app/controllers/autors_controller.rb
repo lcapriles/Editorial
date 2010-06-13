@@ -1,32 +1,20 @@
 class AutorsController < ApplicationController
 
-  before_filter :localize_date, :only => [:update, :create ]
-  def localize_date
-    params[:autor][:fecha].gsub!(/[.\/]/,'-')
+  before_filter :localize_date, :only => [:update, :create]
+  def localize_date #TODO: Será posible que convierta cualquier campo fecha de la clase??
+      params[:autor][:fecha].gsub!(/[.\/]/,'-') #Si la fecha es con "-", ROR entiende formato europeo dd-mm-yyy!!!
   end
   
   # GET /autors
   # GET /autors.xml
   def index
     
-    @qbe_index = Autor.new(params[:autor]) 
+    @qbe_key = Autor.new() #Con esto, solo veremos los argumentos propios a la clase...
+    #En base al qbe_key construido en la vista, se construye el qbe_select para el select...
+    build_qbe(params)  #TODO: Mejorar uso parámetors... que no sean "cableados"... 
     
-    params.each do |key, value|
-      if @qbe_index.attribute_names().include?(key)
-        if not value.blank?
-          if @select_buff_index.nil?
-            @select_buff_index =  key + " like " + "'" + value + "%'"
-            @qbe_index[key] = value
-          else
-            @select_buff_index = @select_buff_index + " and " + key + " like " + "'" + value + "%'"
-            @qbe_index[key] = value
-          end
-        end
-      end
-    end  
-    
-    if  not @select_buff_index.nil?
-      @autors = Autor.paginate :page => params[:page],  :order => 'id ASC', :conditions =>  @select_buff_index 
+    if  not @qbe_select.nil?
+      @autors = Autor.paginate :page => params[:page],  :order => 'id ASC', :conditions =>  @qbe_select 
     else
       @autors = Autor.paginate :page => params[:page],  :order => 'id ASC'
     end
@@ -47,7 +35,6 @@ class AutorsController < ApplicationController
     session[:id] = params[:id]
     @titulo.autor_id = session[:id]
     
-    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @autor }
@@ -58,7 +45,7 @@ class AutorsController < ApplicationController
   # GET /autors/new.xml
   def new
     @autor = Autor.new
-    @autors = Autor.find(:all)
+#    @autors = Autor.find(:all) // TODO: Ver si esto hace falta
     
     respond_to do |format|
       format.html # new.html.erb
@@ -120,5 +107,27 @@ class AutorsController < ApplicationController
   def auto_complete_for_autor_nombre
     @autors = Autor.find(:all, :conditions => "nombre like " + "'" + params[:autor][:nombre] + "%'" )
   end
+
+  def index_select #Presentamos la ventana Index modal...
+    @qbe_key = Autor.new() 
+    @autors = Autor.paginate :page => params[:page],  :order => 'id ASC'
+    session[:pagina] = 1
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @autors }
+    end
+  end
+ 
+  def index_select1  #Actualizamos el grid de la ventana Index modal...
+    @qbe_key = Autor.new()
+    build_qbe(params)  #TODO: Mejorar uso parámetors... que no sean "cableados"...   
+    session[:pagina] = session[:pagina] + params[:page].to_i    #TODO: CRITICO - Manejo Nro.Pg negativos
+    if  not @qbe_select.nil? 
+      @autors = Autor.paginate :page => params[:page],  :order => 'id ASC', :conditions =>  @qbe_select 
+    else
+      @autors = Autor.paginate :page => session[:pagina],  :order => 'id ASC'
+    end
+    render "index_select1.html", :layout => false
+  end 
   
 end
